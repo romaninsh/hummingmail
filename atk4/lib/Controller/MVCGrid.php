@@ -18,6 +18,7 @@ class Controller_MVCGrid extends AbstractController {
         'numeric'=>'number',
         'real'=>'real',
         'money'=>'money',
+        'password'=>'password',
         'text'=>'shorttext',
         'reference'=>'text',
         'datetime'=>'timestamp',

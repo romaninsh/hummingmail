@@ -1,11 +1,36 @@
-Postfix Virtual Mailserver uses database to read information about users and domains. Typically MySQL would have
-four tables. However with some clever selects the same information can be stored in a single table. 
+=====
+ABOUT
+=====
 
-This project contains the Postfix files for configuring of your mailserver to use a single-mysql table and web
-interface written on agile toolkit which allows three level access - for regular users, domain admins and superadmins.
+Humming Mail aims to become an easily customizable Postfix Administration
+interface. It supports plug-ins, different SQL backend configurations.
 
+More than any other web mail admin, Humming Mail can be extended by adding
+new pages, fields, relations rules and custom look.
 
-INSTALLATION:
+Humming Mail is based on Agile Toolkit which makes User Interface development
+an easy job. It relies on Model-View-Controller paradygms and native AJAX
+techniques.
+
+====================
+POSTFIX, CourierIMAP
+====================
+
+To use Humming Mail with Postfix, you need to store your configuration in
+MySQL (or other supported database). Humming Mail allows you to have your
+own database configuration and it comes with two database structures: one
+is compatible with 'postfixadmin' but another uses a more compact structure
+based on SQL syntax.
+
+CourierIMAP should also be configured to use with SQL. You will find
+configuration files under doc/
+
+============
+INSTALLATION
+============
+
+By Default Humming Mail uses a compact configuration of your Postfix. If
+you are already running virtual mailbox setup, see "migration" section.
 
 1. Follow Postgres Virtual email hosting howto. 
 2. Create MySQL user and database
@@ -17,16 +42,62 @@ INSTALLATION:
 u: admin@example.org
 p: secret
 
-Add users for other domains
+Add users for other domains and change default password
+
+==========
+MIGRRATION
+==========
+
+Follow regular installation guide. Inside your "config.php" select to use
+"postfixadmin" compatible database setup. You should be able to run
+Humming Mail alongside PostfixAdmin on the same database.
+
+Installing upgrades will not affect your postfixadmin tables but new
+features and extensions will not be available while you are using
+"postfixadmin" setup.
+
+You can migrate users from our postfixadmin tables into the new single-table
+configuration when you are ready to drop support for "postfixadmin" and
+fully migrate to Humming Mail.
 
 
-ENHANCING:
+=========
+ENHANCING
+=========
 
-Fork this project on github: https://github.com/romaninsh/Agile-Postfix-Admin
+One of the goals of Humming Mail is ability to easily customize and change
+interface, database setup and add additional features. 
 
-edit index.php file. Follow agile toolkit learning guide to extend. 
+TODO: write more......
 
 
-SECURING:
+=======
+UPGRADE
+=======
 
-edit config.php file to set web_output=null and log_output=full to avoid errors being displayed to the user
+1. Unpack your new installation on top of existing one (or git pull)
+2. Go into "doc" folder and run "dbupdate.sh" script.
+
+===============
+LICENSE, AUTHOR
+===============
+
+Humming Mail is developed by
+ * Romans Malinovskis: https://sourceforge.net/users/romaninsh
+ 
+and is dual licensed under AGPL (Affero General Public License).
+
+Agile Toolkit is bundled with Humming Mail also uses AGPL license.
+
+
+========================
+CONTRIBUTING AND SUPPORT
+========================
+
+If you would like to participate and contribute into Humming Mail, you should
+be familiar with Agile Toolkit framework and be able to structure your code
+in an elegant way.
+
+Please contact author of this software if you have any questions.
+
+

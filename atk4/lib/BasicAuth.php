@@ -216,14 +216,23 @@ class BasicAuth extends AbstractController {
 		 * If you want to change authentication logic - redefine this function
 		 */
         if($this->model){
-            if($this->model->hasMethod('verifyCredintials'))return $this->model->verifyCredintials($user,$passord);
+			$this->debug("Using model authentication");
+            if($this->model->hasMethod('verifyCredintials')){
+                $this->debug("Method 'verifyCredentials' is present in the model, using that");
+                return $this->model->verifyCredintials($user,$passord);
+            }
             // Use user=email
             $this->model->tryLoadBy($this->login_field,$user);
-            if(!$this->model->loaded())return false;
+            if(!$this->model->loaded()){
+                $this->debug("Could not load user with this login");
+                return false;
+            }
             if($this->model[$this->password_field]!=$this->encryptPassword($password,$user)){
+                $this->debug("User loaaded, but password didn't match");
                 $this->model->unload();
                 return false;
             }
+            $this->debug("Successfully authenticated with model");
             return true;
         }
 		if(!$this->allowed_credintals)$this->allowed_credintals=array('demo'=>'demo');

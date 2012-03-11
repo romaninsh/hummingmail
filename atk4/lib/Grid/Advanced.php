@@ -151,6 +151,9 @@ class Grid_Advanced extends Grid_Basic {
         }
         return parent::render();
     }
+    function format_password($field){
+        $this->current_row[$field]='****';
+    }
     function format_number($field){
     }
     function format_text($field){
