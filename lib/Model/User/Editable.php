@@ -2,6 +2,10 @@
 class Model_User_Editable extends Model_User {
     function init(){
         parent::init();
+
+        $this->onlyEditable($this->api->getAccessLevel());
+
+        /*
         if($this->api->auth){
             $al=$this->api->auth->get('access_level');
 
@@ -18,5 +22,6 @@ class Model_User_Editable extends Model_User {
                     ->addMoreInfo('users level',$al);
             }
         }
+         */
     }
 }

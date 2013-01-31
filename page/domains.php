@@ -6,6 +6,9 @@ class page_domains extends Page {
         $this->add('H1')->set('Domain Administration');
         $cr=$this->add('Domain_CRUD');
         $cr->setModel('Domain_Editable');
+
+        $cr->addRef('User');
+
         if($crf=$cr->form){
             $crf->setFormClass('stacked atk-row');
             $crf->add('Order')->move($crf->addSeparator('span7 noborder'),'first')->now();

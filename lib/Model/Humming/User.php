@@ -4,6 +4,7 @@ class Model_Humming_User extends Model_Table {
     public $id_field='email';
     function init(){
         parent::init();
+        $this->getField('email')->visible(true);
         $this->addField('name');
         $this->addField('clear')->type('password');
         $this->addField('domain');
@@ -21,5 +22,9 @@ class Model_Humming_User extends Model_Table {
     function beforeSave()
     {
         list($e,$this['domain'])=explode('@',$this['email']);
+    }
+    function onlyEditable($level){
+        if ($level=='user') {
+        }
     }
 }
