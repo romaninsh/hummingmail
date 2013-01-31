@@ -2,6 +2,7 @@
 class UserList extends Grid {
 	function init(){
 		parent::init();
+        $this->js('reload',$this->js()->reload());
         $p=$this->add('Paginator',null,'paginator');
         $f=$this->addQuickSearch(array('name','email'));
         if($this->api->getUserLevel() > 9){

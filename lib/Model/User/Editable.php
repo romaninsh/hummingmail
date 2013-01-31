@@ -9,7 +9,6 @@ class Model_User_Editable extends Model_User {
                 $this->addCondition('email',$this->api->auth->get('email'));
                 $this->getField('email')->readonly(true);
                 $this->getField('access_level')->destroy();
-                $this->getField('domains')->destroy();
             }
             elseif($al==9){
                 $d=explode('@',$this->api->auth->get('email'));
