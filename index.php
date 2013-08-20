@@ -1,7 +1,7 @@
 <?php
 include 'atk4/loader.php';
 
-class ApiMailSql extends ApiAdmin {
+class ApiMailSql extends ApiFrontend {
 	public $auth;
 	public $logger;
 	
@@ -17,15 +17,15 @@ class ApiMailSql extends ApiAdmin {
 		$this->dbConnect();
 		//$this->api->add('VersionControl');
 		$this->template->trySet('page_title', $this->apinfo['name']);
-		$this->auth = $this->api->add('BasicAuth');
-        $this->auth->setModel('User','email','clear');
+	//	$this->auth = $this->api->add('BasicAuth');
+        //$this->auth->setModel('User','email','clear');
              #->setNoCrypt();
             
-        $this->auth->check();
+        //$this->auth->check();
         $menu = $this->add('Menu', null, 'Menu');
         $menu
             ->addMenuItem('UserManagement','User Management')
-            ->addMenuItem('domains','Domains')
+            //->addMenuItem('domains','Domains')
             //->addMenuItem('Postfix Configuration')
             ->addMenuItem('About')
             ->addMenuItem('Logout')
@@ -40,7 +40,7 @@ class ApiMailSql extends ApiAdmin {
     function page_UserManagement($p){
     		if($this->getUserLevel() > 0){
                 $userlist = $this->add('CRUD',array('grid_class'=>'UserList'));
-                $userlist->setModel('User_Editable',null,array('email','name','forward','forward_to','access_level','domains'));
+                $userlist->setModel('User_Editable',null,array('id','email','name','forward','forward_to','access_level','enabled'))->setOrder('email');
     		}else{
                 $f=$this->add('Form');
                 $f->addSubmit('Update');
@@ -55,7 +55,8 @@ class ApiMailSql extends ApiAdmin {
 		$p->add('NotImplemented', null, 'Content');
 	}
 	function getUserLevel(){
-        return $this->api->auth->get('access_level');
+	return 99;
+        //return $this->api->auth->get('access_level');
 	}
 }
 

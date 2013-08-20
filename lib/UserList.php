@@ -4,13 +4,15 @@ class UserList extends Grid {
 		parent::init();
         $p=$this->add('Paginator',null,'paginator');
         $f=$this->addQuickSearch(array('name','email'));
+	/*
         if($this->api->getUserLevel() > 9){
             $f=$f->addField('dropdown','domain','');
             $f->owner->search_field->template->trySet('row_class','span6');
             $f->owner->add('Order')->move($f,'first')->later();
-            $f->setModel('Domain');
+            //$f->setModel('Domain');
             $f->template->trySet('row_class','span6');
         }
+	*/
 		//if($this->api->getUserLevel() < 99)$this->setDomains();
 	}
 	function format_access($field){
